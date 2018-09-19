@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"html/template"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -10,7 +11,6 @@ import (
 	"github.com/amku91/lam-heroku/mongo"
 	"github.com/rs/cors"
 	"github.com/amku91/lam-heroku/config"
-	"os"
 )
 
 func main() {
@@ -40,6 +40,10 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		Home(w)
+	})
+
 	r.Get("/ping", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Lam Ping Successful"))
 	})
@@ -53,8 +57,8 @@ func main() {
 
 	log.Println("Application will listen at port 8080")
 
-	//err = http.ListenAndServe(":8080", r)
-	http.ListenAndServe(":" + os.Getenv("PORT"), r)
+	err = http.ListenAndServe(":8080", r)
+	//err = http.ListenAndServe(":" + os.Getenv("PORT"), r)
 	if err != nil {
 		log.Println("Error while initializing the Application: " + err.Error())
 		return
@@ -74,4 +78,17 @@ func initDB() {
 	mongo.PATH = config.MONGO_DSN
 	mongo.DBNAME = config.MONGO_DATABASE
 	mongo.CheckAndInitServiceConnection()
+}
+
+// Home Loads the home page
+func Home(w http.ResponseWriter) {
+
+	t, err := template.ParseFiles("index.html")
+	if err != nil {
+		log.Print("template parsing error: ", err)
+	}
+	err = t.Execute(w, nil)
+	if err != nil {
+		log.Print("template executing error: ", err)
+	}
 }

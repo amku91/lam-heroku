@@ -24,6 +24,10 @@
 #   go-tests = true
 #   unused-packages = true
 
+[metadata.heroku]
+  root-package = "github.com/amku91/lam-heroku"
+  go-version = "1.10.3"
+  install = [ "./..." ]
 
 [[constraint]]
   name = "github.com/go-chi/chi"

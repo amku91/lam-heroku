@@ -8,8 +8,8 @@ RUN go get ./...
 RUN go install github.com/amku91/lam-heroku
 
   # Set binary as entrypoint
-ENTRYPOINT /go/bin/lam-heroku --port 8090 --host 0.0.0.0
+ENTRYPOINT /go/bin/lam-heroku
 
   # Expose default port (8080)
-EXPOSE 8090
+EXPOSE 8080
 

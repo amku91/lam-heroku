@@ -11,6 +11,7 @@ import (
 	"github.com/amku91/lam-heroku/mongo"
 	"github.com/rs/cors"
 	"github.com/amku91/lam-heroku/config"
+	"os"
 )
 
 func main() {
@@ -57,8 +58,8 @@ func main() {
 
 	log.Println("Application will listen at port 8080")
 
-	err = http.ListenAndServe(":8080", r)
-	//http.ListenAndServe(":" + os.Getenv("PORT"), r)
+	//err = http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":" + os.Getenv("PORT"), r)
 	if err != nil {
 		log.Println("Error while initializing the Application: " + err.Error())
 		return

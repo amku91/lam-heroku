@@ -28,6 +28,22 @@ Note: It will first remove previous installed docker and docker images to overco
   - `./main`
   
   That's All.
+  
+  # Perform Testing
+  
+  - To run test cases you must have installed go on your system.
+  
+  - Run `go get github.com/amku91/lam-heroku` and run `go get ./...`
+  
+  - Now cmd to `lam-heroku` directory and run `go build main.go`
+  
+  - Finally run `./main` in same folder
+  
+  - Now open another terminal and cmd to `lam-heroku` directory and run `go test -v ./testing`
+  
+  Note: Testing command not gonna run while using docker.
+  
+  
 
 
 # Tech Stacks
@@ -45,6 +61,7 @@ Built by using :
 4. Ozzo Validation    -->> `https://github.com/go-ozzo/ozzo-validation`
 5. Google Maps    -->> `https://googlemaps.github.io/maps`
 6. Go Cors    -->> `https://github.com/rs/cors`
+7. Go Baloo Testing -->. `https://gopkg.in/h2non/baloo.v3`
 
 and  some more go system libraries.
 
